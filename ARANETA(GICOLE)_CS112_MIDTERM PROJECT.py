@@ -1,5 +1,5 @@
-import random
-import sys
+import random  # Import the random module for generating random numbers
+import sys  # Import the sys module for system-related functionalities
 
 
 # Define a function for the one-player game.
