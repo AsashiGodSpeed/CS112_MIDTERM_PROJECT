@@ -162,7 +162,7 @@ if versus == 1:
 else:
     while True:
         print("")
-        one_plr()
+        two_plr()
         again = input("Do you want to play again? Y/N: ").upper()
 
         # Check if the player wants to play again or exit
