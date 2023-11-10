@@ -4,7 +4,7 @@ import sys  # Import the sys module for system-related functionalities
 
 # Define a function for the one-player game.
 def one_plr():
-    # Initialize win counts for players and ai and ties count to 0
+    # Initialize win counts for Player and AI and ties count to 0
     plr_win = 0
     ai_win = 0
     ties = 0
@@ -12,12 +12,12 @@ def one_plr():
     # Iterate for three rounds.
     for i in range(1, 4):
         # Define the elements and their weaknesses.
-        elements = {'f': "Fire", 'w': "Water", 'l': "Leaf", 'e': "Earth", 'i': "Ice", 'a': "Air"}
+        elements = {'f': "Fire", 'w': "Water", 'l': "Leaf", 'e': "Earth", 'a': "Air", 'i': "Ice"}
         element_weakness = {"Fire": ("Air", "Water"), "Water": ("Leaf", "Ice"), "Leaf": ("Fire", "Air"),
-                            "Earth": ("Water", "Leaf"), "Ice": ("Fire", "Earth"), "Air": ("Earth", "Ice")}
+                            "Earth": ("Water", "Leaf"), "Air": ("Earth", "Ice"), "Ice": ("Fire", "Earth")}
 
         # Prompt the player to select an element.
-        print("[F] Fire, [W] Water, [L] Leaf, [E] Earth, [I] Ice, [A] Air")
+        print("[F] Fire, [W] Water, [L] Leaf, [E] Earth, [A] Air, [I] Ice")
         while True:
             select1 = input("Select your element:").lower()
             if select1 in elements:
@@ -54,7 +54,7 @@ def one_plr():
         elif plr_win < ai_win:
             print(f"You lose! {plr_win} win, {ai_win} lost, {ties} tie")
         else:
-            print(f"All ties! 3/{ties} ties")
+            print(f"It's a tie! {plr_win} win, {ai_win} lost, {ties} tie")
 
 
 # Define a function for the two-player game.
@@ -67,12 +67,12 @@ def two_plr():
     # Iterate for three rounds.
     for i in range(1, 4):
         # Define the elements and their weaknesses.
-        elements = {'f': "Fire", 'w': "Water", 'l': "Leaf", 'e': "Earth", 'i': "Ice", 'a': "Air"}
+        elements = {'f': "Fire", 'w': "Water", 'l': "Leaf", 'e': "Earth", 'a': "Air", 'i': "Ice"}
         element_weakness = {"Fire": ("Air", "Water"), "Water": ("Leaf", "Ice"), "Leaf": ("Fire", "Air"),
-                            "Earth": ("Water", "Leaf"), "Ice": ("Fire", "Earth"), "Air": ("Earth", "Ice")}
+                            "Earth": ("Water", "Leaf"), "Air": ("Earth", "Ice"), "Ice": ("Fire", "Earth")}
 
         # Prompt both players to select elements.
-        print("[F] Fire, [W] Water, [L] Leaf, [E] Earth, [I] Ice, [A] Air")
+        print("[F] Fire, [W] Water, [L] Leaf, [E] Earth, [A] Air, [I] Ice")
         while True:
             select1 = input("Select your element Player 1: ").lower()
             if select1 in elements:
@@ -80,7 +80,7 @@ def two_plr():
             else:
                 print("Invalid choice. Please select a valid element.")
 
-        # Clear the console for player 2's choice.
+        # Prints 30 newline to clear the console for player 2's choice.
         print("\n" * 30)
 
         # Prompt Player 2 to select their element
@@ -122,7 +122,7 @@ def two_plr():
         elif plr1_win < plr2_win:
             print(f"Player 2 won! Player 1 won {plr1_win}, Player 2 won {plr2_win}, {ties} tie")
         else:
-            print(f"Tie! Player 1 won {plr1_win}, Player 2 won {plr2_win}, {ties} tie")
+            print(f"It's a tie! Player 1 won {plr1_win}, Player 2 won {plr2_win}, {ties} tie")
 
 
 # Main program starts here.
@@ -142,18 +142,34 @@ while True:
     elif versus == 2:
         print("You have chosen 2 player")
         break
+# Ask the user if they want to see the tutorial
+while True:
+    Tutorial = input("Do you want to see the tutorial? Y/N: ").upper()
+    if Tutorial == 'Y':
+        print("\nThere are 6 elements. Fire, Water, Leaf, Earth, Air, Ice\n\n"
+              "Fire beats Ice and Leaf\nWater beats Fire and Earth\nLeaf beats Air and Ice"
+              "\nEarth beats Fire and Air\nAir beats Leaf and Ice\nIce beats Water and Earth\n")
+        Quit = input("Enter Q to exit: ").upper()
+        if Quit == 'Q':
+            break
+    elif Tutorial == 'N':
+        break
+    else:
+        print("Enter only Y or N")
 
 # Check if the game mode is 1 player
 if versus == 1:
     while True:
+        print("----------------------------------------------------------")
         # Call the one-player game function
         one_plr()
-        # Ask if the player wants to play again
+        print("----------------------------------------------------------")
+        # Ask if the player wants to play again or exit
         again = input("Do you want to play again? Y/N: ").upper()
-        if again == 'N':
-            sys.exit()
-        # Ensure the input is either 'Y' or 'N'
+        
+        # Ensure valid input for playing again or exiting
         while again not in ('Y', 'N'):
+            print("Enter only Y or N")
             again = input("Do you want to play again? Y/N: ").upper()
             if again == 'N':
                 sys.exit()
@@ -161,16 +177,16 @@ if versus == 1:
 # If the game mode is 2 players, enter this block
 else:
     while True:
-        print("")
+        print("----------------------------------------------------------")
         two_plr()
+        print("----------------------------------------------------------")
+        # Ask if the player wants to play again or exit
         again = input("Do you want to play again? Y/N: ").upper()
-
-        # Check if the player wants to play again or exit
-        if again == 'N':
-            sys.exit()
-
+        
         # Ensure valid input for playing again or exiting
         while again not in ('Y', 'N'):
+            print("Enter only Y or N")
             again = input("Do you want to play again? Y/N: ").upper()
             if again == 'N':
                 sys.exit()
+                
